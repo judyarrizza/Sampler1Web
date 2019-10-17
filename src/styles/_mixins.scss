@@ -1,0 +1,165 @@
+/* TODO  remove this file if not used */
+
+// Section Header
+%section-header {
+  $header-blue: $ld-color-primary;
+
+  position: relative;
+  border-bottom: 3px solid $header-blue;
+  margin-bottom: 0;
+
+  h3 {
+    height: 34px;
+    line-height: 34px;
+    color: $header-blue;
+    text-transform: uppercase;
+    margin-bottom: 0; //it's set to 0.5 rem by bootstrap v4
+
+    .ld-icon {
+      height: 33px;
+      width: 33px;
+      display: block;
+      float: left;
+      margin-top: 1px;
+      margin-right: 10px;
+      line-height: 34px;
+      text-align: center;
+      background-color: $header-blue;
+      color: $ld-color-white;
+      font-size: $font-size-xxx-large;
+    }
+  }
+}
+
+// Input
+@mixin ld-input {
+  width: 100%;
+  padding: 0;
+  height: 25px;
+  margin: 0;
+  line-height: 25px;
+  font-size: $font-size-medium;
+  font-weight: 600;
+  color: $ld-color-black-almost;
+  border: 0;
+  background-color: transparent;
+
+  .mobile-view & {
+    // on iOS devices, font size for inputs must be 16px or more to prevent interface zooming
+    font-size: 16px;
+  }
+
+  &::placeholder {
+    font-style: italic;
+    font-weight: normal;
+    color: $ld-color-neutral;
+  }
+}
+
+@mixin ld-underlined {
+  border-bottom: 1px solid $ld-color-neutral;
+}
+
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+@mixin input-placeholder {
+  // Note: always keep placeholder text left-aligned even if input text is right-aligned
+  @include optional-at-root('::-webkit-input-placeholder') {
+    @content;
+
+    text-align: left;
+  }
+
+  @include optional-at-root(':-moz-placeholder') {
+    @content;
+
+    text-align: left;
+  }
+
+  @include optional-at-root('::-moz-placeholder') {
+    @content;
+
+    text-align: left;
+  }
+
+  @include optional-at-root(':-ms-input-placeholder') {
+    @content;
+
+    text-align: left;
+  }
+}
+
+@mixin select-placeholder {
+  font-style: italic;
+  font-weight: normal;
+  color: $ld-color-neutral;
+}
+
+@mixin page-links {
+  list-style-type: none;
+  display: flex;
+  margin-bottom: 0;
+  overflow: hidden;
+
+  li {
+    flex-shrink: 1;
+    overflow: hidden;
+    padding: 0 15px;
+
+    @media print {
+      padding: 0;
+    }
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  // TODO: Remove anchor tags and convert to buttons for semantics
+  a,
+  button {
+    $border-width: 0.3rem;
+
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-bottom: $border-width solid transparent; // set border-color on hover
+    padding-top: $border-width; // keep border-bottom and padding-top the same so it's vertically aligned
+    display: block;
+    height: 4.4rem;
+    line-height: 4.4rem - $border-width; // subtract border-width to keep vertical alignment
+    color: $ld-color-primary;
+
+    &:not(.active) {
+      @media print {
+        display: none; // hide all non-active lines
+      }
+    }
+
+    &.active,
+    &:hover:not([disabled]) {
+      text-decoration: none;
+      border-bottom-color: $ld-color-primary;
+
+      @media print {
+        border-bottom: 0;
+      }
+    }
+
+    &:hover:not([disabled]) {
+      cursor: pointer;
+    }
+
+    &:focus {
+      text-decoration: none;
+    }
+  }
+}

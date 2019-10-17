@@ -1,0 +1,23 @@
+@import 'styles/variables';
+@import 'styles/mixins';
+@import 'styles/bootstrap-grid';
+@import 'styles/tables';
+@import 'styles/forms';
+@import 'styles/theme';
+
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+  font-family: 'Open Sans', sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -ms-overflow-style: scrollbar;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: $ld-color-neutral-lightest;
+}

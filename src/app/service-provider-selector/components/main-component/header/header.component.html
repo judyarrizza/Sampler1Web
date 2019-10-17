@@ -1,0 +1,19 @@
+<div class="header">
+  <div class="left-side">
+    <div class="title">{{spType}} Service Provider</div>
+    <div *ngIf="nameDisplay || addressDisplay" class="subtitle">
+      <span class="prompt">Selected:</span>
+      <span class="name">{{nameDisplay}}</span>
+      <span class="address">{{addressDisplay}}</span>
+    </div>
+  </div>
+
+  <div class="middle">
+    <app-breadcrumbs [crumbs]="crumbs" (cancelFilter)="onCancelFilter($event)"></app-breadcrumbs>
+  </div>
+
+  <div class="right-side">
+    <sps-searchbox (change)="onSearchStringChanged($event)"></sps-searchbox>
+    <sps-filters-button (toggleFilter)="onToggleFilter($event)"></sps-filters-button>
+  </div>
+</div>

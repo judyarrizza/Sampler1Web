@@ -1,0 +1,30 @@
+<div *ngIf="dataLoaded else loading" class="loan-depot-theme root service-provider-selector">
+  <sps-header [nameDisplay]="nameDisplay"
+              [addressDisplay]="addressDisplay"
+              [crumbs]="crumbs"
+              (cancelFilter)="onCancelFilter($event)"
+              (toggleFilter)="onToggleFilter($event)"
+              (changeSearch)="onChangeSearch($event)"></sps-header>
+  <sps-table [searchString]="searchString"
+             [selectedId]="selectedId"
+             [providers]="providers"
+             [filters]="filters"
+             (changeSelection)="onChangeSelection($event)"></sps-table>
+  <sps-footer [allowNewProvider]="allowNewProvider"
+              [providerChanged]="providerChanged"
+              (newProvider)="onNewProvider()"
+              (closePage)="onClose()"
+              (update)="onUpdate()"></sps-footer>
+  <div *ngIf="showFilter === true" class="filters-input-popup-row">
+    <div class="filters-input-box">
+      <sps-filters-input [filters]="filters" (changeFilters)="onChangeFilters($event)"></sps-filters-input>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loan-depot-theme root service-provider-selector">
+    <fv-loading></fv-loading>
+  </div>
+</ng-template>
+

@@ -1,0 +1,52 @@
+<div class="filters-input">
+  <div class="column">
+    <h4>State</h4>
+    <div>
+      <input type="radio"
+             [(ngModel)]="filters.states"
+             name = "states"
+             value="all"
+             (change)="onStatesChange()"> All States
+    </div>
+    <div>
+      <input type="radio"
+             [(ngModel)]="filters.states"
+             name = "states"
+             value="none"
+             (change)="onStatesChange()"> No States
+    </div>
+    <div class="states-box">
+      <div *ngFor="let s of filters.statesList">
+        <input type="checkbox"
+               [(ngModel)]="s.selected"
+               (change)="onStateChange(s)"> {{s.state}}
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <h4>Approval Status</h4>
+    <div>
+      <input type="checkbox"
+             [(ngModel)]="filters.approved"
+             (change)="onApprovedChange()"> Approved ({{filters.totalApproved}})
+    </div>
+    <div>
+      <input type="checkbox"
+             [(ngModel)]="filters.notApproved"
+             (change)="onNotApprovedChange()"> Not Approved ({{filters.totalNotApproved}})
+    </div>
+  </div>
+  <div class="column">
+    <h4>Fee Availability</h4>
+    <div>
+      <input type="checkbox"
+             [(ngModel)]="filters.available"
+             (change)="onAvailableChange()"> Available ({{filters.totalAvailable}})
+    </div>
+    <div>
+      <input type="checkbox"
+             [(ngModel)]="filters.notAvailable"
+             (change)="onNotAvailableChange()"> Not Available ({{filters.totalNotAvailable}})
+    </div>
+  </div>
+</div>

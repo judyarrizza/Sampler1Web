@@ -1,0 +1,67 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/styles';
+
+:host {
+  display: flex;
+  justify-content: center;
+
+  .root {
+    font-family: 'Open Sans', sans-serif;
+    display: block; // give layout
+    font-size: 14px;
+    line-height: 1.5;
+    color: $ld-color-neutral-darker;
+    background-color: $ld-color-neutral-lightest;
+    box-sizing: border-box;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-overflow-style: scrollbar;
+    padding: 12px;
+    width: 1195px;
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: inherit;
+    }
+
+    .view-contents {
+      padding: 12px $ld-page-indent;
+    }
+
+    .table-box {
+      width: 100%;
+    }
+
+    .filters-input-popup-row {
+      width: 100%;
+      max-width: 1170px;
+      height: 350px;
+      background-color: transparent;
+      z-index: 1000;
+      position: fixed;
+      top: 76px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .filters-input-box {
+      border: 1px solid $ld-color-neutral-lighter;
+      width: 20%;
+      min-width: 550px;
+      height: 100%;
+      background-color: white;
+      box-shadow: rgb(184, 182, 184) 2px 13px 9px -7px;
+    }
+
+    ////////////////////////////////////////////////////////// global styles
+    .vertical-center {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .loan-depot-theme {
+    @include angular-material-theme($loan-depot-theme);
+  }
+}

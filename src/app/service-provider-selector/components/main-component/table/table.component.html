@@ -1,0 +1,55 @@
+<ag-grid-angular id="grid"
+  style="width: 100%; height: 533px;"
+  class="ag-theme-balham"
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [quickFilterText]="searchString"
+  [rowHeight]=50
+  [pagination]="true"
+  [paginationPageSize]="paginationPageSize"
+  [suppressPaginationPanel]="true"
+  [suppressScrollOnNewData]="true"
+  [suppressCellSelection]="true"
+  [suppressRowClickSelection]="true"
+  (cellClicked)="onCellClicked($event)"
+  (paginationChanged)="onPaginationChanged($event)"
+  (gridReady)="onGridReady($event)"
+>
+</ag-grid-angular>
+
+<div *ngIf="totalRecs > 0" class="controls">
+  <span class="rows-prompt">Rows per Page: </span>
+  <input type="number" [(ngModel)]="paginationPageSize" (ngModelChange)="onPageSizeChanged($event)">
+  <span class="rec-range">
+    {{startRec}} - {{endRec}} of {{totalRecs}}
+  </span>
+  <span>
+    <span class="chevron left-chevron" [ngClass]="leftChevronCursor">
+      <fa-icon [type]="'chevron-left'"  [color]="leftColor" (click)="onGoToPrevious()"></fa-icon>
+    </span>
+
+    <span class="num" *ngFor="let num of leftPageNumbers">
+      <span *ngIf="num !== currentPage" class="not-current" (click)="onGoToPage(num-1)">{{num}}</span>
+      <span *ngIf="num === currentPage" class="current">{{num}}</span>
+    </span>
+    <span *ngIf="middlePageNumbers.length > 0">
+      ...
+      <span class="num" *ngFor="let num of middlePageNumbers">
+        <span *ngIf="num !== currentPage" class="not-current" (click)="onGoToPage(num-1)">{{num}}</span>
+        <span *ngIf="num === currentPage" class="current">{{num}}</span>
+      </span>
+    </span>
+    <span *ngIf="rightPageNumbers.length > 0">
+      ...
+    <span class="num" *ngFor="let num of rightPageNumbers">
+      <span *ngIf="num !== currentPage" class="not-current" (click)="onGoToPage(num-1)">{{num}}</span>
+      <span *ngIf="num === currentPage" class="current">{{num}}</span>
+    </span>
+    </span>
+
+    <span class="chevron right-chevron" [ngClass]="rightChevronCursor">
+      <fa-icon [type]="'chevron-right'" [color]="rightColor" (click)="onGoToNext()"></fa-icon>
+    </span>
+  </span>
+</div>
+

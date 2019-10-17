@@ -1,0 +1,4 @@
+{
+  "serviceProviderSelectorApiUrl": "https://localhost:44301",
+  "serviceProviderSelectorEventsUrl": "https://localhost:44302"
+}

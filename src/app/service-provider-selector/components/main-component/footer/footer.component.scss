@@ -1,0 +1,16 @@
+@import '../../../../../styles/variables';
+:host-context(.service-provider-selector) {
+  .footer {
+    margin-top: 44px;
+    padding-top: 16px;
+    border-top: 1px solid $ld-color-neutral-lighter;
+    width: 100%;
+    button {
+      width: 150px;
+      margin-left: 20px;
+    }
+    .right-side {
+      float: right;
+    }
+  }
+}

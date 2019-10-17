@@ -1,0 +1,571 @@
+/* TODO remove this file if not used */
+$cell-font-size: $font-size-default;
+$cell-font-weight: 600;
+$invalid-color: $ld-color-utility1;
+$input-height: 25px;
+
+// draws a box on top of a `.cell` or `.col-`
+@mixin cell-overlay {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  // use -1px so overlay is right on top of the cell instead of slightly inset
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+}
+
+@mixin overlay-style($background-color, $border-color, $z-index) {
+  select {
+    position: relative; // needed otherwise the <select> doesn't show on top of the cell
+  }
+
+  &::before {
+    @include cell-overlay;
+    background-color: $background-color;
+  }
+
+  // !!! HEADS UP !!!
+  // keep border separate from background color
+  // if they are combined the either border won't correctly show on top of the other borders
+  // or the background-color will show on top of the field
+  &::after {
+    @include cell-overlay;
+    border: 1px solid $border-color;
+    z-index: $z-index; // needed to keep error fields on top of required fields
+  }
+}
+
+// FIXME: Add a class to the `<inputs>` instead of selecting by type and update the CSS
+@mixin input-style {
+  input[list],
+  input[type='text'],
+  input[type='number'],
+  input[type='email'],
+  input[type='date'],
+  input[type='search'],
+  input[type='password'] {
+    @content;
+  }
+
+  // for the ld-selects
+  .loan-programs-selected,
+  .underline-wrapper {
+    @content;
+  }
+}
+
+@mixin required-label {
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+
+  // sometimes we need to turn off required styles (e.g. employment-information on overview)
+  .hide-required-styles & {
+    font-weight: normal;
+  }
+
+  // add icon
+  &::after {
+    content: '*';
+    font-weight: 600;
+    margin-top: 3px;
+    margin-left: 2px;
+    font-size: 16px;
+    line-height: 1; // keep line height small so it doesn't affect the height of the label
+    align-self: baseline;
+
+    .hide-required-styles & {
+      display: none;
+    }
+  }
+}
+
+@mixin invalid-label {
+  color: $ld-color-utility1;
+  display: inline-flex;
+  align-items: center;
+
+  &::after {
+    content: '!';
+    border-radius: 50%;
+    color: $ld-color-white;
+    background-color: $ld-color-utility1;
+    width: 12px;
+    height: 12px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    align-self: center; // fix alignment when nested inside `.deprecated-required-field`
+    justify-content: center;
+    font-size: 1rem;
+    margin-top: -1px;
+    margin-left: 4px;
+  }
+}
+
+@mixin required-field {
+  .label-text {
+    @include required-label;
+  }
+
+  // when the input is nested in an underlined form
+  @at-root .ld-form-underlined & {
+    @include input-style {
+      background-color: $warning-cell-bg-color;
+      border-bottom-color: $warning-cell-border-color;
+      border-bottom-width: 2px;
+      height: $input-height - 1; // reduce height by 1 because of 2px border-bottom (instead of 1px border-bottom), so fields don't shift
+    }
+  }
+
+  // when the input is nested in blocks
+  .ld-form-blocks & {
+    @include overlay-style($warning-cell-bg-color, $warning-cell-border-color, 1);
+  }
+
+  // for modals nested inside ld-form-blocks
+  .ld-form-blocks .ld-form-blocks-no-border & {
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  // needed for employment-information because we don't show required fields on overview
+  .hide-required-styles .ld-form-blocks & {
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+}
+
+@mixin invalid-field {
+  .label-text {
+    @include invalid-label;
+  }
+
+  // when the input is nested in an underlined form
+  @at-root .ld-form-underlined & {
+    @include input-style {
+      background-color: $invalid-cell-bg-color;
+      border-bottom-color: $invalid-cell-border-color;
+      border-bottom-width: 2px;
+    }
+  }
+
+  // when the input is nested in blocks
+  .ld-form-blocks & {
+    @include overlay-style($invalid-cell-bg-color, $invalid-cell-border-color, 2);
+  }
+
+  // for modals nested inside ld-form-blocks
+  .ld-form-blocks .ld-form-blocks-no-border & {
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+}
+
+// allow on either element
+.ld-form-input,
+.ld-form-input .title,
+.ld-radio-inline-wrapper {
+  @at-root {
+    // TODO: Revisit this
+    .ld-input:not(.ng-invalid) input.has-mask.not-empty {
+      color: transparent;
+
+      &:focus {
+        color: $ld-color-black;
+      }
+    }
+  }
+}
+
+.ld-radio-inline-wrapper {
+  width: 100%;
+}
+
+.input-placeholder {
+  width: 100%;
+  height: $input-height;
+}
+
+.ld-form-input {
+  width: 100%;
+  display: block;
+  margin-bottom: 0;
+  line-height: $input-height;
+  color: $ld-color-neutral-darker;
+  position: relative;
+
+  // class to use for form fields in modals so labels don't shrink prematurely
+  &.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  @include input-placeholder {
+    color: $ld-color-neutral;
+    font-style: italic;
+    font-weight: normal;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    font-size: $font-size-default;
+    line-height: $input-height;
+    text-transform: uppercase;
+    color: $ld-color-black-almost;
+    height: $input-height;
+    position: relative;
+
+    .ld-form-underlined & {
+      font-size: 13px;
+      text-transform: none; // titles in underlined forms should not be uppercase
+    }
+
+    &.has-title {
+      cursor: help;
+    }
+  }
+
+  .label-text {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: flex; // align icons
+    height: $input-height;
+    line-height: $input-height;
+    align-items: center;
+
+    .text-overflow {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      .wrap-title & {
+        white-space: normal;
+      }
+    }
+  }
+
+  input[list],
+  input[type='text'],
+  input[type='number'],
+  input[type='email'],
+  input[type='date'],
+  input[type='search'],
+  input[type='password'],
+  select,
+  .input-display {
+    @include ld-input();
+  }
+
+  // keep underline styles separate
+  @include input-style {
+    .ld-form-underlined & {
+      @include ld-underlined();
+    }
+  }
+
+  // fix for <select>s that don't have <ld-select>
+  .ld-form-underlined & {
+    & > select {
+      @include ld-underlined();
+    }
+  }
+
+  .ld-textarea {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    line-height: normal;
+    font-size: $font-size-medium;
+    font-weight: 600;
+    color: $ld-color-black-almost;
+    border: 0;
+    background-color: transparent;
+    display: block; // fix inline-block generating extra space
+
+    .ld-form-underlined & {
+      border: 1px solid $ld-color-neutral;
+      height: 80px;
+      background-color: $ld-color-white;
+    }
+  }
+
+  // remove spinner from number inputs
+  input[type='number'] {
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0; // margin still exists even though it's hidden
+    }
+  }
+
+  // options inherit styles from <select>, so reset so that they don't inherit from select.select-placeholder
+  option {
+    font-style: normal;
+    color: $ld-color-black-almost;
+
+    &:disabled {
+      @include select-placeholder();
+    }
+  }
+
+  // "Placeholder" style for select box when the default value is selected (added via javascript)
+  // You have to apply this style to the <select> so that it displays properly
+  select.select-placeholder {
+    @include select-placeholder();
+  }
+
+  .calculator-field {
+    .ld-icon {
+      // scss-lint:disable VariableForProperty
+      float: right;
+      font-size: 2.4rem;
+    }
+  }
+
+  strong {
+    margin-right: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-weight: 600;
+  }
+
+  .icon-before {
+    margin-right: 5px;
+    line-height: inherit; // fix vertical alignment
+
+    &.ld-icon-home {
+      margin-right: 3px; // svg has extra white-space on the end
+    }
+  }
+
+  .icon-after {
+    margin-left: 5px;
+    line-height: inherit; // fix vertical alignment
+
+    &.ld-icon-lock {
+      font-size: 14px;
+      margin-left: 3px;
+    }
+  }
+}
+
+// fix //_reboot.scss making radio buttons squares on iPads
+input[type='radio'] {
+  border-radius: 50%;
+}
+
+.mask-wrapper {
+  position: relative;
+  display: flex; // so optional date icon shows on one line
+  align-items: center;
+  height: $input-height;
+
+  input {
+    &:focus ~ .mask-value {
+      display: none;
+    }
+    ~ .mask-value {
+      display: block;
+    }
+  }
+
+  .mask-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    font-weight: 600;
+
+    &.read-only {
+      .ld-form-underlined & {
+        height: $input-height;
+      }
+    }
+
+    .mobile-view & {
+      // on iOS devices, font size for inputs must be 16px or more to prevent interface zooming
+      font-size: 16px;
+    }
+
+    .ld-form-underlined & {
+      bottom: 1px; // so it doesn't cover the underline
+    }
+
+    .required-field &,
+    .invalid-field & {
+      // only hide overlay if it doesn't have the read-only class attached to it
+      &:not(.read-only) {
+        display: none;
+      }
+    }
+  }
+
+  .date-icon {
+    font-size: 1.8rem;
+    color: $ld-link;
+  }
+}
+
+// FIXME: Move to component SCSS file
+edit-discount-points-form {
+  display: block;
+  min-width: 700px;
+
+  .discount-points-table-header {
+    color: $ld-color-neutral;
+  }
+
+  .calc-value-cell {
+    line-height: 2em;
+
+    span {
+      vertical-align: bottom;
+      line-height: normal;
+    }
+  }
+
+  .total-discount-container {
+    line-height: 2em;
+
+    span {
+      vertical-align: bottom;
+      line-height: normal;
+    }
+  }
+
+  .popover-devider {
+    margin: 15px -35px;
+  }
+}
+
+.ld-checkbox,
+.ld-radio,
+.ld-checkbox-inline,
+.ld-radio-inline {
+  margin-bottom: 0;
+  margin-right: 10px;
+  cursor: pointer;
+  align-items: center;
+  line-height: $input-height;
+  font-size: 14px;
+
+  label {
+    cursor: pointer;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    label {
+      cursor: not-allowed;
+    }
+  }
+
+  .read-only & {
+    cursor: default;
+  }
+
+  input[type='radio'],
+  input[type='checkbox'] {
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
+    cursor: inherit;
+    flex-shrink: 0;
+
+    &[disabled] {
+      cursor: not-allowed;
+    }
+  }
+
+  .mobile-view & {
+    // on iOS devices, font size for inputs must be 16px or more to prevent interface zooming
+    font-size: 16px;
+
+    input[type='radio'],
+    input[type='checkbox'] {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.ld-checkbox,
+.ld-radio {
+  display: flex;
+
+  label {
+    flex: 1 1 auto;
+  }
+}
+
+.ld-checkbox-inline,
+.ld-radio-inline {
+  display: inline-flex;
+}
+
+// validation styles, keep at bottom of file for CSS import order
+
+// stand-alone style if label is disconnected from field and the field is required
+.required-label {
+  @include required-label;
+}
+
+// stand-alone style if label is disconnected from field and the field is invalid
+.invalid-label {
+  @include invalid-label;
+}
+
+.deprecated-required-field {
+  @include required-field;
+
+  // do this otherwise we end up with z-index issues with the ::before element
+  &.cell,
+  &.cell.noneditable-cell {
+    .ld-form-blocks & {
+      background-color: $warning-cell-bg-color;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
+
+//.deprecated-invalid-field {
+//  @include invalid-field;
+//}
+
+// this is built into <ld-input-generic>/<ld-input-base>
+.input-field-wrapper {
+  // required styles
+  &.required-field {
+    @include required-field;
+  }
+
+  // invalid styles
+  &.invalid-field {
+    @include invalid-field;
+  }
+}

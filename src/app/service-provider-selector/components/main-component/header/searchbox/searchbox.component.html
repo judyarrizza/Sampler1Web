@@ -1,0 +1,5 @@
+<fa-icon class="search-icon" [type]="'search'"></fa-icon>
+<input class="search-input"
+       [ngModel]="searchString"
+       placeholder="Search by name, address, etc"
+       (ngModelChange)="onChange($event)">

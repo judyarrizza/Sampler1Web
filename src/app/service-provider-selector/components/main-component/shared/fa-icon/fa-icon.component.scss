@@ -1,0 +1,70 @@
+@import '../../../../../../styles/variables';
+
+span {
+  margin-right: 4px;
+}
+.green {
+  fill: $ld-color-utility3-dark2;
+}
+.blue {
+  fill: $blue-cerulean;
+}
+.red {
+  fill: $ld-color-utility1;
+}
+.yellow {
+  fill: $ld-color-utility2-dark;
+}
+
+.black {
+  fill: $ld-color-black-almost;
+}
+
+.neutral-dark {
+  fill: $ld-color-neutral-dark;
+}
+
+.neutral {
+  fill: $ld-color-neutral;
+}
+
+.neutral-light {
+  fill: $ld-color-neutral-light;
+}
+
+.primary {
+  fill: $ld-color-primary;
+}
+
+.spin
+{
+  -webkit-animation: spin1 2s infinite linear;
+  -moz-animation: spin1 2s infinite linear;
+  -o-animation: spin1 2s infinite linear;
+  -ms-animation: spin1 2s infinite linear;
+  animation: spin1 2s infinite linear;
+  display: block;
+}
+
+@-webkit-keyframes spin1 {
+  0% { -webkit-transform: rotate(0deg);}
+  100% { -webkit-transform: rotate(360deg);}
+}
+@-moz-keyframes spin1 {
+  0% { -moz-transform: rotate(0deg);}
+  100% { -moz-transform: rotate(360deg);}
+}
+@-o-keyframes spin1 {
+  0% { -o-transform: rotate(0deg);}
+  100% { -o-transform: rotate(360deg);}
+}
+@-ms-keyframes spin1 {
+  0% { -ms-transform: rotate(0deg);}
+  100% { -ms-transform: rotate(360deg);}
+}
+/*
+@-keyframes spin1 {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+*/

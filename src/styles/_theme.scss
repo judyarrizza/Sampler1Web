@@ -1,0 +1,23 @@
+@import '/_palette';
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$loan-depot-primary: mat-palette($loan-depot-blue);
+$loan-depot-accent: mat-palette($loan-depot-yellow);
+
+// The warn palette is optional (defaults to red).
+$loan-depot-warn: mat-palette($loan-depot-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$loan-depot-theme: mat-light-theme(
+    $loan-depot-primary,
+    $loan-depot-accent,
+    $loan-depot-warn
+);
+
+$loan-depot-dark-theme: mat-dark-theme(
+    $loan-depot-primary,
+    $loan-depot-accent,
+    $loan-depot-warn
+);

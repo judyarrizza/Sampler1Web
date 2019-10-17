@@ -1,0 +1,4 @@
+{
+  "serviceProviderSelectorApiUrl": "https://ServiceProviderSelectorApi-DV1.loandepotdev.works",
+  "serviceProviderSelectorEventsUrl": "https://ServiceProviderSelectorEvents-DV1.loandepotdev.works"
+}

@@ -1,0 +1,96 @@
+// Style Guide Colors
+$ld-color-white: #fff;
+$ld-color-black: #000;
+$ld-color-black-almost: #3b3a3a;
+$ld-color-neutral-darker: #484f59;
+$ld-color-neutral-dark: #667080;
+$ld-color-neutral: #a1a7af;
+$ld-color-neutral-light: #dee0e8;
+$ld-color-neutral-lighter: #eff0f4;
+$ld-color-neutral-lightest: #f9fafd;
+$ld-color-primary-dark: #3a5e7a;
+$ld-color-primary: #5e9aca;
+$ld-color-primary-light: #bed6e8;
+$ld-color-primary-lighter: #f0f6fa;
+$ld-color-secondary1-dark: #635c4d;
+$ld-color-secondary1: #a39881;
+$ld-color-secondary1-light: #d0cac2;
+$ld-color-secondary1-lighter: #f9f9f7;
+$ld-color-secondary2-dark: #347477;
+$ld-color-secondary2: #54c4c7;
+$ld-color-secondary2-light: #bed6e8;
+$ld-color-secondary2-lighter: #f3fbfd;
+$ld-color-utility1-dark: #760331;
+$ld-color-utility1: #c60751;
+$ld-color-utility1-light: #e484a6;
+$ld-color-utility1-lighter: #faf5f5;
+$ld-color-utility2-dark: #976e21;
+$ld-color-utility2: #ffba39;
+$ld-color-utility2-dark: #b27812;
+$ld-color-utility2-light: #ffdd9d;
+$ld-color-utility2-lighter: #fff9ed;
+$ld-color-utility3-dark: #647917;
+$ld-color-utility3-dark2: #84a521;
+$ld-color-utility3: #a4cd27;
+$ld-color-utility3-light: #d1e695;
+$ld-color-utility3-lighter: #f5faed;
+$ld-color-utility4: #572a8a;
+$ld-color-utility5: #2666ab;
+
+// TODO: The following colors did not have a close match in the style guide
+$blue-mariner: #2871bf;
+$blue-cerulean: #2f6491;
+$ld-link: #2666ab;
+
+// form variables
+$default-cell-border-border: #8d939d;
+$noneditable-cell-bg-color: $ld-color-neutral-lighter;
+$warning-cell-bg-color: #fef5e2;
+$warning-cell-border-color: #f9b925;
+
+$invalid-cell-bg-color: #fbedf2;
+$invalid-cell-border-color: #be0051;
+
+$success-cell-bg-color: #f5f9e8;
+$success-cell-border-color: #aed04e;
+
+$info-cell-bg-color: #f4f8fc;
+$info-cell-border-color: #88b4d6;
+
+// Fonts
+$font-size-x-small: 1rem;
+$font-size-small: 1.1rem;
+$font-size-default: 1.2rem;
+$font-size-medium: 1.3rem;
+$font-size-large: 1.4rem;
+$font-size-x-large: 1.6rem;
+$font-size-xx-large: 2rem;
+$font-size-xxx-large: 2.2rem;
+
+$font-family: 'Open Sans', sans-serif;
+
+// Bootstrap Configuration
+$popover-bg: #fff;
+$popover-arrow-width: 4px;
+
+// Grid Breakpoints (Keep in sync with bootstrap breakpoints)
+$ld-screen-xs-min: 0;
+$ld-screen-sm-min: 544px;
+$ld-screen-md-min: 768px;
+$ld-screen-lg-min: 992px;
+$ld-screen-xl-min: 1200px;
+$ld-screen-xxl-min: 1550px; // this breakpoint is not defined in bootstrap (bootstrap maxes out at 1200px)
+
+$ld-screen-xs-max: $ld-screen-sm-min - 1;
+$ld-screen-sm-max: $ld-screen-md-min - 1;
+$ld-screen-md-max: $ld-screen-lg-min - 1;
+$ld-screen-lg-max: $ld-screen-xl-min - 1;
+$ld-screen-xl-max: $ld-screen-xxl-min - 1; // this breakpoint is not defined in bootstrap (bootstrap maxes out at 1200px)
+
+// min height for urla navigation breakpoints
+$ld-min-height: 600px;
+$ld-page-indent: 32px;
+$ld-header-separation: 20px;
+
+// grid
+$grid-gutter-width: 24px;

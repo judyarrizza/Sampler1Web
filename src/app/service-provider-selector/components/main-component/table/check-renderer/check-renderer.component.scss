@@ -1,0 +1,11 @@
+:host-context(.service-provider-selector) {
+  .mark {
+    width: 100%;
+    height: 100%; // make height of cell so there's an nice big click area
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 6px;
+    margin-left: 8px;
+  }
+}

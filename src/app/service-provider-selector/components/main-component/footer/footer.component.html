@@ -1,0 +1,10 @@
+<div class="footer">
+  <button *ngIf="allowNewProvider === true" (click)="onNewProvider()" color="primary" mat-stroked-button class="mat-stroked-button mat-primary">+ New Provider</button>
+  <div *ngIf="providerChanged === true" class="right-side">
+    <button (click)="onClose()" color="primary" mat-stroked-button class="mat-stroked-button mat-primary">Cancel</button>
+    <button (click)="onUpdate()" color="primary" mat-flat-button class="mat-flat-button mat-primary">Update</button>
+  </div>
+  <div *ngIf="providerChanged === false" class="right-side">
+    <button (click)="onClose()" color="primary" mat-flat-button class="mat-flat-button mat-primary">Close</button>
+  </div>
+</div>

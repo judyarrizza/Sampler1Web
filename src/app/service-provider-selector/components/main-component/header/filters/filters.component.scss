@@ -1,0 +1,18 @@
+@import '../../../../../../styles/variables';
+:host-context(.service-provider-selector) {
+
+  .filters {
+    padding: 4px;
+    background-color: white;
+    border: 1px solid $ld-color-neutral-lighter;
+    cursor: pointer;
+
+    .text {
+      color: $ld-color-primary;
+      font-size: 1.2rem;
+      padding-left: 4px;
+      padding-right: 20px;
+      font-weight: bold;
+    }
+  }
+}

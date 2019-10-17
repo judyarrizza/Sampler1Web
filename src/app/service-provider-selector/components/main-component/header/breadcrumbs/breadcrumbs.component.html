@@ -1,0 +1,5 @@
+<div class="breadcrumbs">
+  <span *ngFor="let crumb of crumbs">
+    <app-crumb [crumb]="crumb" (cancelFilter)="onCancel($event)"></app-crumb>
+  </span>
+</div>

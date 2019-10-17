@@ -1,0 +1,15 @@
+@import '../../../../../../styles/variables';
+
+  .loading-container {
+    width: 100%;
+    line-height: 1;
+    display: flex;
+    color: $ld-color-neutral-dark;
+    font-style: italic;
+    font-size: 13px;
+  }
+  .message {
+    margin-left: 4px;
+    margin-top: 12px;
+  }
+

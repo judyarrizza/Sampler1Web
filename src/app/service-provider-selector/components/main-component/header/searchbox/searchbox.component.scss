@@ -1,0 +1,19 @@
+@import '../../../../../../styles/variables';
+:host-context(.service-provider-selector) {
+  .search-icon {
+    margin-top: 6px;
+  }
+
+  .search-input {
+    margin-right: 10px;
+    border: 1px solid $ld-color-neutral-lighter;
+    background-color: $ld-color-neutral-lightest;
+    padding: 6px;
+    width: 200px;
+  }
+
+  ::placeholder {
+    color: $ld-color-neutral;
+    font-size: $font-size-medium;
+  }
+}
