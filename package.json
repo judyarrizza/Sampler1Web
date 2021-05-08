@@ -78,7 +78,7 @@
     "karma-jasmine-html-reporter": "0.2.2",
     "mkdirp": "0.5.1",
     "ncp": "2.0.0",
-    "ng-packagr": "4.2.0",
+    "ng-packagr": "10.1.1",
     "protractor": "5.4.1",
     "rimraf": "^2.6.3",
     "ts-node": "7.0.1",
